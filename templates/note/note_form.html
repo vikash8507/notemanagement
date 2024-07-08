@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} Note Form Page {% endblock title%}
+{% block content %}
+    <div class="form-content my-3 p-3">
+        <div class="container">
+            <div class="alert alert-primary" role="alert">
+                <h3>{% if object %}Edit Note {% else %} Create New Note {% endif %}</h3>
+              </div>
+              <form action="{% if object %} {% url 'note:note_update' object.id %} {% else %} {% url 'note:note_create' %} {% endif %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="note-title">Title</label>
+                    <input name="title" type="text" value="{% if object %} {{object.title}} {% endif %}" class="form-control" id="note-title" placeholder="My New note..." required>
+                  </div>
+                  <div class="form-group">
+                    <label for="note-body">Note Detail</label>
+                    <textarea name="body" class="form-control" id="note-body" rows="5" required>{% if object %} {{object.body}} {% endif %}</textarea>
+                  </div>
+                <p>
+                    <input type="submit" class="btn btn-success" value="Submit">
+                    <a class="btn btn-primary" href="{% url 'note:note_list' %}" role="button">Notes List</a>
+                </p>
+            </form>
+        </div>
+     </div>
+{% endblock content %}

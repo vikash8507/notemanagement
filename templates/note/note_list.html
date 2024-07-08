@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Note List Page {% endblock title%}
+{% block content %}
+    <div class="form-content my-3 p-3">
+        <div class="container">
+            <a class="btn btn-primary mb-3" href="{% url 'note:note_create' %}" role="button">Add New Note</a>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Body</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for note in notes %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ note.title }}</td>
+                        <td> {{ note.body }} </td>
+                        <td>
+                            <a class="btn btn-info" href="{% url 'note:note_detail' note.id %}" role="button">View</a>
+                            <a class="btn btn-primary" href="{% url 'note:note_update' note.id %}" role="button">Update</a>
+                            <a class="btn btn-danger" href="{% url 'note:note_delete' note.id %}" role="button">Delete</a>
+                        </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+     </div>
+{% endblock content %}

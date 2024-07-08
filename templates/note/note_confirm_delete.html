@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} Delete Confirmation Page {% endblock title%}
+{% block content %}
+    <div class="form-content my-3 p-3">
+        <div class="container">
+            <div class="alert alert-danger" role="alert">
+                <h3>Are you sure you want to delete "{{ note }}"?</h3>
+              </div>
+              <form method="post">{% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Confirm" />
+                <a class="btn btn-primary" href="{% url 'note:note_list' %}" role="button">Notes List</a>
+            </form>
+        </div>
+     </div>
+{% endblock content %}
