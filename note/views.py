@@ -11,7 +11,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 
 class NoteListView(ListView):
     model = Note
-    context_object_name = 'notes'
+    context_object_name = "notes"
+    paginate_by = 10
 
     def get_queryset(self) -> QuerySet[Note]:
         return super().get_queryset().filter(author=self.request.user)
@@ -23,7 +24,7 @@ class NoteDetailView(DetailView):
 class NoteCreateView(SuccessMessageMixin, CreateView):
     model = Note
     form_class = NoteForm
-    success_url = reverse_lazy('note:note_list')
+    success_url = reverse_lazy("note:note_list")
     success_message = "Note Created Successfully!"
 
 
@@ -40,7 +41,7 @@ class NoteCreateView(SuccessMessageMixin, CreateView):
 class NoteUpdateView(SuccessMessageMixin, UpdateView):
     model = Note
     form_class = NoteForm
-    success_url = reverse_lazy('note:note_list')
+    success_url = reverse_lazy("note:note_list")
     success_message = "Note Updated Successfully!"
 
     def get(self, request, *args, **kwargs):
@@ -59,7 +60,7 @@ class NoteUpdateView(SuccessMessageMixin, UpdateView):
 
 class NoteDeleteView(SuccessMessageMixin, DeleteView):
     model = Note
-    success_url = reverse_lazy('note:note_list')
+    success_url = reverse_lazy("note:note_list")
     success_message = "Note Deleted Successfully!"
 
     def get(self, request, *args, **kwargs):

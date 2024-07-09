@@ -15,9 +15,11 @@ services:
   postgres:
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_backups:/backups
     env_file:
       - ./.envs/.postgres.env
 
 volumes:
-  postgres_data:
+  postgres_data: {}
+  postgres_data_backups: {}
